@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fluent</title>
+    <!-- CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/windows-ui-fabric@4.0.2/dist/config/app-config.css" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/windows-ui-fabric@4.0.2/dist/windows-ui.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/windows-ui-fabric@4.0.2/dist/icons/fonts/fonts.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- JS -->
+    <script src="https://cdn.jsdelivr.net/npm/windows-ui-fabric@4.0.2/dist/windows-ui.min.js" crossorigin="anonymous"></script>
+    <!--Icons-->
+    <link href="https://cdn.jsdelivr.net/npm/windows-ui-fabric@4.0.2/dist/icons/winui-icons.min.css" rel="stylesheet" />
+    <script>
+        let dots = 0;
+        let updateInterval;
+
+        function startUpdate() {
+            const updateBtn = document.querySelector('.app-btn-primary');
+            const closeBtn = document.querySelector('[data-win-dismiss="alert"]');
+            const updateText = document.querySelector('.app-alert-bar span');
+            
+            updateBtn.style.display = 'none';
+            closeBtn.style.display = 'none';
+            
+            updateInterval = setInterval(() => {
+                dots = (dots + 1) % 4;
+                updateText.innerHTML = `<i class="icons10-refresh"></i> Updating${''.padEnd(dots, '.')}`;
+            }, 1000);
+
+            // Add timeout to close alert after 10 seconds
+            setTimeout(() => {
+                clearInterval(updateInterval);
+                const alert = document.querySelector('.app-alert-bar');
+                alert.style.display = 'none';
+            }, 10000);
+        }
+
+        function closeAlert() {
+            clearInterval(updateInterval);
+            const alert = document.querySelector('.app-alert-bar');
+            alert.style.display = 'none';
+        }
+    </script>
+</head>
+
+<body>
+    <div class="app-alert-bar alert-bar-secondary" role="alert">
+        <i class="icons10-exclamation-mark app-color-primary"></i>
+        <strong class="app-color-primary">Windows Update</strong><span><i class="icons10-refresh"> </i>Update awaiting.</span>
+        <div class="app-alert-bar-end-content">
+            <button class="app-btn app-btn-primary" onclick="startUpdate()">Update</button>
+            <button data-win-dismiss="alert" aria-label="Close" onclick="closeAlert()"></button>
+        </div>
+    </div>
+    <h1><b>Hey! This is my website!</b></h1>
+    <h2><b>Who am I?
+            <div></div> I'm Iwo24pl, a developer.
+            <div></div> I just started so no hate pls.
+            <div></div> Wait a notification!
+            <div></div> There is an Update!
+            <div></div> Will you update or not?
+            <div></div> Your decision.
+        </b></h2>
+</body>
+</html>
